@@ -1,15 +1,14 @@
-//let capture
-// let tracker
 let playing = false;
 let thevideo;
 let button;
 let balls = []
+let walls = []
 
 function setup() {
 
      createCanvas(800,600).parent('p5')
 
-    thevideo = createVideo(["vid_1.mp4"])
+    thevideo = createVideo(["vid_3.mp4"])
     thevideo.size(800,600)
     thevideo.hide()
 
@@ -70,13 +69,13 @@ if (distance > 25) {
                         y: random(mouth_center.y - 5, mouth_center.y + 5),
                         vx: random(nose_pointing / 4, nose_pointing / 4),
                         vy: random(0, 2),
-                        c: [random(255), random(255), random(255), random(200, 255)]
+                        c: [random(255), random(255), random(255), random(150,180)]
                     }
     balls.push(random_ball)
 
 }
 
-if (distance > 15) {
+if (distance > 20) {
 
   let eyesleftcenter = {x: lefteyetop.x,
                         y: (lefteyetop.y + lefteyebottom.y) / 2
@@ -88,15 +87,15 @@ if (distance > 15) {
 
   let random_ball = { x: random(eyesleftcenter.x - 20, eyesleftcenter.x + 20),
                       y: random(eyesleftcenter.y - 5, eyesleftcenter.y + 5),
-                      vx: random(nose_pointing / 4, nose_pointing / 4),
+                      vx: random(-nose_pointing, -nose_pointing),
                       vy: random(0, 2),
                       c: [random(255), random(255), random(255), random(200, 255)]
                                         }
 
-  balls.push(random_ball)
+  walls.push(random_ball)
 }
 
-if (distance > 15) {
+if (distance > 20) {
 
   let eyesleftcenter = {x: lefteyetop.x,
                         y: (lefteyetop.y + lefteyebottom.y) / 2
@@ -107,38 +106,58 @@ if (distance > 15) {
                         }
             let random_ball2 = { x: random(eyesrightcenter.x - 20, eyesrightcenter.x + 20),
                                               y: random(eyesrightcenter.y - 5, eyesrightcenter.y + 5),
-                                              vx: random(nose_pointing / 4, nose_pointing / 4),
+                                              vx: random(nose_pointing, nose_pointing),
                                               vy: random(0, 2),
                                               c: [random(255), random(255), random(255), random(200, 255)]
                           }
 
-                          balls.push(random_ball2)
+                          walls.push(random_ball2)
 }
 
 for (let ball of balls) {
 
     noFill()
     stroke(ball.c)
-    circle(ball.x, ball.y, 5)
     strokeWeight(1)
-    circle(ball.x - 5, ball.y +5, 3)
-    circle(ball.x + (random(20)), ball.y, 2)
-    circle(ball.x, ball.y + (random(20)), 10)
+    circle(ball.x, ball.y, 5)
     circle(ball.x, ball.y, 10)
     circle(ball.x, ball.y, 15)
     circle(ball.x, ball.y, 20)
+    circle(ball.x,ball.y,25)
+    circle(ball.x,ball.y,30)
+    circle(ball.x,ball.y,35)
+    circle(ball.x,ball.y,40)
     ball.x += ball.vx
     ball.y += ball.vy
 
     ball.vy += .5
-
     if (ball.x < 0 || ball.x > width || ball.y < 0 || ball.y > height) {
-        balls.splice(balls.indexOf(ball), 1)
+      balls.splice(balls.indexOf(ball), 1)
     }
 
-}
 
 }
+
+for (let ball of walls) {
+
+  stroke(random(255),random(255),200,random(150,180))
+  square(ball.x, ball.y, 1,5)
+  square(ball.x+5,ball.y-2.5, 1,10)
+  square(ball.x+10,ball.y-5, 1,15)
+  square(ball.x+15,ball.y-7.5, 1,20)
+  square(ball.x+20,ball.y-10, 1,25)
+  square(ball.x+25,ball.y-12.5, 1,30)
+  square(ball.x+30,ball.y-15, 1,35)
+  square(ball.x+35,ball.y-17.5, 1,40)
+  square(ball.x+40,ball.y-20, 1,45)
+  square(ball.x+45,ball.y-22.5, 1,50)
+  ball.x += ball.vx
+  ball.y += ball.vy
+
+  ball.vy -= .3
+  }
+}
+
 
 
 function mousePressed() {
