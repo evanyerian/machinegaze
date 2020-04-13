@@ -9,7 +9,7 @@ function setup() {
 
      createCanvas(800,600).parent('p5')
 
-    thevideo = createVideo(["vid.mp4"])
+    thevideo = createVideo(["vid_1.mp4"])
     thevideo.size(800,600)
     thevideo.hide()
 
